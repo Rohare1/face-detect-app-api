@@ -27,12 +27,13 @@ const database = {
 		}
 	]
 };
-
+ 
 app.get('/', (req, res) => {
 	res.send(database.users);
 });
 
 app.post('/signin', (req, res) => {
+	// From the fetch method on Signin.js on frontend 
 	if (req.body.email === database.users[0].email && req.body.password === database.users[0].password) {
 		res.json(database.users[0]);
 	} else {
@@ -41,6 +42,7 @@ app.post('/signin', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
+	// From the fetch method on Register.js on frontend 
 	const { email, name, password } = req.body;
 	database.users.push({
 		id: '125',
@@ -67,14 +69,14 @@ app.get('/profile/:id', (req, res) => {
 	}
 });
 
-app.post('/image', (req, res) => {
+app.put('/image', (req, res) => {
 	const { id } = req.body;
 	let found = false;
 	database.users.forEach((user) => {
 		if (user.id === id) {
 			found = true;
 			user.entries++;
-			return res.json('The user ' + user.name + ' now has ' + user.entries + ' entries');
+			return res.json(user.entries);
 		}
 	});
 	if (!found) {
