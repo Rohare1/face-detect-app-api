@@ -34,7 +34,7 @@ app.get('/', (req, res) => {
 
 app.post('/signin', (req, res) => {
 	if (req.body.email === database.users[0].email && req.body.password === database.users[0].password) {
-		res.json('success');
+		res.json(database.users[0]);
 	} else {
 		res.status(400).json('error logging in');
 	}
@@ -42,14 +42,11 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
 	const { email, name, password } = req.body;
-	bcrypt.hash(password, null, null, function(err, hash) {
-		console.log(hash);
-	});
 	database.users.push({
-		id: '130',
+		id: '125',
 		name: name,
-		email: email,
-		password: password,
+    email: email,
+    password: password,
 		entries: 0,
 		joined: new Date()
 	});
@@ -66,7 +63,7 @@ app.get('/profile/:id', (req, res) => {
 		}
 	});
 	if (!found) {
-		res.status(400).json('not found');
+		res.status(404).json('not found');
 	}
 });
 
