@@ -1,6 +1,19 @@
 const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
+const knex = require('knex');
+
+const postgres = knex({
+	client: 'pg',
+	connection: {
+		host: '127.0.0.1',
+		user: 'ryanohare',
+		password: '',
+		database: 'smart-brain'
+	}
+});
+
+console.log(postgres.select('*').from('users'));
 
 const app = express();
 app.use(express.json());
@@ -47,8 +60,8 @@ app.get('/profile/:id', (req, res) => {
 			found = true;
 			return res.json(user);
 		}
-	})
-	if (!found){
+	});
+	if (!found) {
 		res.status(400).json('not found');
 	}
 });
@@ -69,20 +82,18 @@ app.post('/register', (req, res) => {
 app.put('/image', (req, res) => {
 	const { id } = req.body;
 	let found = false;
-	database.users.forEach(user => {
+	database.users.forEach((user) => {
 		if (user.id === id) {
 			found = true;
 			user.entries++;
 			return res.json(user.entries);
 		}
-	})
-	if (!found){
+	});
+	if (!found) {
 		res.status(400).json('not found');
 	}
-})
+});
 
 app.listen(3000, () => {
 	console.log('App is running on port 3000');
 });
-
-
