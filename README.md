@@ -1,5 +1,6 @@
-# Face Detect APP
-A React application built with the [The Complete Web Developer in 2020: Zero to Mastery](https://www.udemy.com/course/the-complete-web-developer-zero-to-mastery/)
+# Face Detect Api
+Back end for the Face Detect App [click here](https://github.com/Rohare1/face-detect-app)
+### Built with
 ## Demo
 For a live demo please [click here](https://auto-face-detect.herokuapp.com/)
 ### Built with
